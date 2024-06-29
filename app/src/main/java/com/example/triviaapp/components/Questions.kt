@@ -46,7 +46,7 @@ import com.example.triviaapp.util.AppColors
 fun Questions(viewModel: QuestionsViewModel) {
     val questions = viewModel.data.value.data?.toMutableList()
     val questionIndex = remember {
-        mutableStateOf(0)
+        mutableStateOf(1)
     }
     if (viewModel.data.value.loading == true) {
     } else {
@@ -102,7 +102,7 @@ fun QuestionsDisplay(
             horizontalAlignment = Alignment.Start
         ) {
             if (questionIndex.value >= 3) ShowProgress(score = questionIndex.value)
-            QuestionTracker(counter = questionIndex.value)
+            QuestionTracker(counter = questionIndex.value,viewModel.getTotalQuestions())
             DrawDottedLine(pathEffect)
             Column {
                 Text(
@@ -276,10 +276,10 @@ fun ShowProgress(score: Int = 12) {
             )
         ) {
             Text(
-                text = (score * 10).toString(),
+                text = (score * 1).toString(),
                 modifier = Modifier
                     .clip(shape = RoundedCornerShape(23.dp))
-                    .fillMaxHeight(0.87f)
+                    .fillMaxHeight(0.67f)
                     .fillMaxWidth()
                     .padding(6.dp),
                 color = AppColors.mOffWhite,
